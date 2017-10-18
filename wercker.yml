@@ -37,9 +37,7 @@ testapp:
               sleep 10
               CREDITSCORE_URL=http://localhost:8080/creditscore
               echo 'Microservice URL=' $CREDITSCORE_URL
-              curl -s "$INVENTORY_URL" | grep "timestamp" > test.out
-              cat test.out
-              if curl -s "$INVENTORY_URL" | grep "timestamp"
+              if curl -s "$CREDITSCORE_URL" | grep "timestamp"
               then
                   # if the keyword is in the conent
                   echo "Test passed"
