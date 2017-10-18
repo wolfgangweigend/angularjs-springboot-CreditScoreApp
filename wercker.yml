@@ -35,9 +35,7 @@ testapp:
         code: | 
               java -jar  /pipeline/source/target/loan-0.1.0.war &
               sleep 10
-              CREDITSCORE_CONTEXTPATH=$(egrep -o '"([^"]*)"' $WERCKER_SOURCE_DIR/src/main/java/io/CustomContainer.java | sed -r 's/"(.*)"/\1/')
-              echo 'Context path=' $CREDITSCORE_CONTEXTPATH
-              CREDITSCORE_URL=http://localhost:8080$CREDITSCORE_CONTEXTPATH/creditscore
+              CREDITSCORE_URL=http://localhost:8080/creditscore
               echo 'Microservice URL=' $CREDITSCORE_URL
               if curl -s "$INVENTORY_URL" | grep "score"
               then
