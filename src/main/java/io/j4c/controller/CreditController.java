@@ -21,7 +21,7 @@ public class CreditController {
 	private static final int SCORE_MAX = 800;
 	private static final int SCORE_MIN = 550;
 //FIXED context path - functional test will pass
-	@RequestMapping(value = "/creditscoreFORTEST", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/creditscore", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public ResponseEntity<CustomerDO> creditScore(@RequestBody CustomerDO customer) {
 
