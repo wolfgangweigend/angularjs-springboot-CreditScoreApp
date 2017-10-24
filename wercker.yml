@@ -1,4 +1,4 @@
-box: combient/java-mvn
+box: combient/java-mvn  
 build:
   steps:
     # Build Inventory REST application
