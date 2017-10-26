@@ -35,7 +35,7 @@ public class CreditController {
 		while (score < SCORE_MIN) {
 			score = score + 100;
 		}
-		
+// 888		
 		customer.setScore(score);
 
 		ResponseEntity<CustomerDO> response = new ResponseEntity<CustomerDO>(customer, HttpStatus.OK);
