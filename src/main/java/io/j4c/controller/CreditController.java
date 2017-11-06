@@ -20,7 +20,7 @@ public class CreditController {
 
 	private static final int SCORE_MAX = 800;
 	private static final int SCORE_MIN = 550;
-//FIXED context path - functional test will for Ateam
+//FIXED context path - functional test 
 	@RequestMapping(value = "/creditscore", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public ResponseEntity<CustomerDO> creditScore(@RequestBody CustomerDO customer) {
@@ -34,8 +34,7 @@ public class CreditController {
 
 		while (score < SCORE_MIN) {
 			score = score + 100;
-		}
-// 888		
+		}		
 		customer.setScore(score);
 
 		ResponseEntity<CustomerDO> response = new ResponseEntity<CustomerDO>(customer, HttpStatus.OK);
