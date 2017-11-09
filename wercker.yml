@@ -14,6 +14,27 @@ push:
         repository: $CR_REPOSITORY
         cmd: java -jar  /pipeline/source/target/loan-0.1.0.war
 
+inject-secret:
+    box:
+        id: alpine
+        cmd: /bin/sh
+    steps:
+    
+    - kubectl:
+        name: delete secret
+        server: $KUBERNETES_MASTER
+        token: $KUBERNETES_TOKEN
+        insecure-skip-tls-verify: true
+        command: delete secret ocrsecret; echo delete registry secret
+        
+    - kubectl:
+        name: create secret
+        server: $KUBERNETES_MASTER
+        token: $KUBERNETES_TOKEN
+        insecure-skip-tls-verify: true
+        command: create secret docker-registry ocrsecret --docker-server=wcr.io --docker-username=$WERCKER_APPLICATION_OWNER_NAME --docker-password=$KUBERNETES_TOKEN --docker-email=$DOCKER_EMAIL; echo create registry secret
+
+
 deploy-to-cluster:
   box:
         id: alpine
@@ -21,16 +42,18 @@ deploy-to-cluster:
 
   steps:        
     - kubectl:
+        name: delete deployment
         server: $KUBERNETES_MASTER
         token: $KUBERNETES_TOKEN
         insecure-skip-tls-verify: true
-        command: delete deployment rest-creditscore  
+        command: delete deployment rest-creditscore; echo delete deplyment  
     
     - kubectl:
+        name: create deployment
         server: $KUBERNETES_MASTER
         token: $KUBERNETES_TOKEN
         insecure-skip-tls-verify: true
-        command: create -f $WERCKER_ROOT/creditscore-deployment.yaml
+        command: create -f $WERCKER_ROOT/creditscore-deployment.yaml; echo create deployment
 
 testapp:
   steps:
