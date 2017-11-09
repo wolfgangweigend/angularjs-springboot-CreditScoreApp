@@ -14,12 +14,13 @@ push:
         repository: $CR_REPOSITORY
         cmd: java -jar  /pipeline/source/target/loan-0.1.0.war
 
-inject-secret:
-    box:
+
+deploy-to-cluster:
+  box:
         id: alpine
         cmd: /bin/sh
-    steps:
-    
+
+  steps:        
     - kubectl:
         name: delete secret
         server: $KUBERNETES_MASTER
@@ -34,13 +35,6 @@ inject-secret:
         insecure-skip-tls-verify: true
         command: create secret docker-registry ocrsecret --docker-server=wcr.io --docker-username=$WERCKER_APPLICATION_OWNER_NAME --docker-password=$KUBERNETES_TOKEN --docker-email=$DOCKER_EMAIL; echo create registry secret
 
-
-deploy-to-cluster:
-  box:
-        id: alpine
-        cmd: /bin/sh
-
-  steps:        
     - kubectl:
         name: delete deployment
         server: $KUBERNETES_MASTER
