@@ -55,6 +55,14 @@ deploy-to-cluster:
         insecure-skip-tls-verify: true
         command: create -f $WERCKER_ROOT/creditscore-deployment.yaml; echo create deployment
 
+    - kubectl:
+        name: expose service
+        server: $KUBERNETES_MASTER
+        token: $KUBERNETES_TOKEN
+        insecure-skip-tls-verify: true
+        command: expose deployment rest-creditscore --type=LoadBalancer --name=rest-creditscore --port=80 --target-port=8080; echo expose deployment
+
+
 testapp:
   steps:
     - script:
