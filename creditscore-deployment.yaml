@@ -5,9 +5,9 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: rest-creditscoreWW
+  name: rest-creditscoreww
   labels:
-    run: rest-creditscoreWW
+    run: rest-creditscoreww
 spec:
   replicas: 1
   strategy:
@@ -18,7 +18,7 @@ spec:
   template:
     metadata:
       labels:
-        run: rest-creditscoreWW
+        run: rest-creditscoreww
     spec:
       containers:
       - image: wcr.io/wolfgangweigend/rest-creditscore:latest
@@ -28,5 +28,5 @@ spec:
         - containerPort: 8080
           protocol: TCP
       imagePullSecrets:
-      - name: ocrsecretWW
+      - name: ocrsecretww
       restartPolicy: Always
