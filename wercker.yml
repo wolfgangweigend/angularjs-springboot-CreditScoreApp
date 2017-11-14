@@ -11,7 +11,7 @@ push:
     # Push to public docker repo Container Registry (CR)
     - internal/docker-push:
         tag: latest
-        repository: $CR_REPOSITORY
+        repository: wcr.io/wolfgangweigend/rest-creditscore
         cmd: java -jar  /pipeline/source/target/loan-0.1.0.war
 
 
@@ -26,21 +26,21 @@ deploy-to-cluster:
         server: $KUBERNETES_MASTER
         token: $KUBERNETES_TOKEN
         insecure-skip-tls-verify: true
-        command: delete secret ocrsecret; echo delete registry secret
+        command: delete secret ocrsecretWW; echo delete registry secret
         
     - kubectl:
         name: create secret
         server: $KUBERNETES_MASTER
         token: $KUBERNETES_TOKEN
         insecure-skip-tls-verify: true
-        command: create secret docker-registry ocrsecret --docker-server=wcr.io --docker-username=$WERCKER_APPLICATION_OWNER_NAME --docker-password=$KUBERNETES_TOKEN --docker-email=$DOCKER_EMAIL; echo create registry secret
+        command: create secret docker-registry ocrsecretWW --docker-server=wcr.io --docker-username=$WERCKER_APPLICATION_OWNER_NAME --docker-password=$KUBERNETES_TOKEN --docker-email=$DOCKER_EMAIL; echo create registry secret
 
     - kubectl:
         name: delete deployment
         server: $KUBERNETES_MASTER
         token: $KUBERNETES_TOKEN
         insecure-skip-tls-verify: true
-        command: delete deployment rest-creditscore; echo delete deplyment  
+        command: delete deployment rest-creditscoreWW; echo delete deplyment  
     
     - kubectl:
         name: create deployment
@@ -54,7 +54,7 @@ deploy-to-cluster:
         server: $KUBERNETES_MASTER
         token: $KUBERNETES_TOKEN
         insecure-skip-tls-verify: true
-        command: expose deployment rest-creditscore --type=LoadBalancer --name=rest-creditscore --port=80 --target-port=8080; echo expose deployment
+        command: expose deployment rest-creditscoreWW --type=LoadBalancer --name=rest-creditscoreWW --port=80 --target-port=8080; echo expose deployment
 
 
 testapp:
