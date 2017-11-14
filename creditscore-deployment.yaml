@@ -5,9 +5,9 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: rest-creditscore
+  name: rest-creditscoreWW
   labels:
-    run: rest-creditscore
+    run: rest-creditscoreWW
 spec:
   replicas: 1
   strategy:
@@ -18,10 +18,10 @@ spec:
   template:
     metadata:
       labels:
-        run: rest-creditscore
+        run: rest-creditscoreWW
     spec:
       containers:
-      - image: wcr.io/maciejgruszka/rest-creditscore:latest
+      - image: wcr.io/wolfgangweigend/rest-creditscore:latest
         imagePullPolicy: Always
         name: rest-creditscore
         ports:
